@@ -1,0 +1,39 @@
+name: verygoodcoffee
+description: A Very Good Project created by Very Good CLI.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  bloc: ^8.1.4
+  connectivity_plus: 4.0.1
+  dio: ^5.8.0+1
+  floor: ^1.4.2
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.6
+  flutter_gen: ^5.10.0
+  flutter_localizations:
+    sdk: flutter
+  focus_on_it: ^2.0.1
+  get_it: ^8.0.3
+  http: ^1.4.0
+  intl: 0.20.2
+  lock_orientation_screen: ^0.0.4
+  meta: ^1.16.0
+  sqflite: ^2.4.2
+
+dev_dependencies:
+  bloc_test: ^9.1.7
+  build_runner: ^2.1.2
+  floor_generator: ^1.4.2
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
