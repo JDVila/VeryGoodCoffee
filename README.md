@@ -1,4 +1,4 @@
-# VeryGoodCoffee
+# VeryGoodCoffee ☕
 
 ## Getting Started 🚀
 
@@ -25,15 +25,15 @@ This app was built using BLoC state management, Clean Architecture for concern s
 8. Press the bottom navigation bar button entitled "Random Coffee" with the coffee icon to get a new image
 9. Press the button entitled "Get New Coffee Image" to receive a new Random Coffee Image from the web
 
-// TODO - Add Images
+<img src="images/1.png" alt="Random Coffee Tab" width="200"/><img src="images/2.png" alt="Marked Favorite" width="200"/><img src="images/3.png" alt="Favorites Tab" width="200"/><img src="images/4.png" alt="New Random Image" width="200"/>
 
-## Running Tests
+## Running Tests 🧪
 Currently, there are only 3 widget tests, and they are currently not working due to a known issue with mocking the database involving a FakeTimer and SQLite. I encounted the same problem with accessing the API, but faked it with a wrapper class. I could not make a Database wrapper in time due to time constrants. The three tests intend to test:
 1. That the app loads as expected
 2. That the left bottom navigation bar button works as expected
 3. That the right bottom navigation bar button works as expected
 
-## Next Steps
+## Next Steps 🪜
 1. Build a wrapper for the database to fake / mock for tests
 2. Add the ability to remove favorites directly from the favorites list
 3. Check for internet connectivity, and fail gracefully to account for this
