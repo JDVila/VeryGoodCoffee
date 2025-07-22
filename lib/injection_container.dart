@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:verygoodcoffee/core/resources/database_dao_wrapper.dart';
 import 'package:verygoodcoffee/core/resources/dio_wrapper.dart';
 import 'package:verygoodcoffee/features/app/presentation/cubit/app_page_navigation_cubit.dart';
 import 'package:verygoodcoffee/features/coffee_favorites/data/repositories/favorite_coffees_repository_impl.dart';
@@ -30,9 +31,14 @@ Future<void> initializeDependencies() async {
     ..registerSingleton<AppDatabase>(
       database,
     )
+    ..registerSingleton<DatabaseDaoWrapper>(
+      sl(),
+    )
     ..registerSingleton<FavoriteCoffeeRepository>(
       FavoriteCoffeeRepositoryImpl(
-        database: sl(),
+        databaseDaoWrapper: DatabaseDaoReal(
+          sl(),
+        ),
       ),
     )
     ..registerSingleton<Dio>(

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:verygoodcoffee/core/resources/database_dao_wrapper.dart';
 import 'package:verygoodcoffee/core/resources/dio_wrapper.dart';
 import 'package:verygoodcoffee/features/app/app.dart';
 import 'package:verygoodcoffee/features/app/presentation/cubit/app_page_navigation_cubit.dart';
@@ -32,9 +33,14 @@ void main() {
       ..registerSingleton<AppDatabase>(
         database,
       )
+      ..registerSingleton<DatabaseDaoWrapper>(
+        sl(),
+      )
       ..registerSingleton<FavoriteCoffeeRepository>(
         FavoriteCoffeeRepositoryImpl(
-          database: sl(),
+          databaseDaoWrapper: DatabaseDaoFake(
+            sl(),
+          ),
         ),
       )
       ..registerFactory<Dio>(

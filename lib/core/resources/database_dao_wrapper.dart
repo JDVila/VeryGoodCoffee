@@ -5,31 +5,31 @@ abstract class DatabaseDaoWrapper {
   const DatabaseDaoWrapper(this.database);
   final AppDatabase database;
   Future<void> insertFavoriteCoffee(FavoriteCoffeeModel newFavorite);
-  Future<void> deleteFavoriteCoffee(FavoriteCoffeeModel newFavorite);
-  Future<void> checkFavoriteCoffee(FavoriteCoffeeModel newFavorite);
+  Future<void> deleteFavoriteCoffee(FavoriteCoffeeModel formerFavorite);
+  Future<List<FavoriteCoffeeModel>> checkFavoriteCoffee(
+    FavoriteCoffeeModel checkCoffeeModel,
+  );
 }
-
-// TODO: Finish Database Dao Wrapper for Macks / Fakes
 
 class DatabaseDaoReal extends DatabaseDaoWrapper {
   DatabaseDaoReal(super.database);
 
   @override
-  Future<void> checkFavoriteCoffee(FavoriteCoffeeModel newFavorite) async {
-    // TODO: implement deleteFavoriteCoffee
-    throw UnimplementedError();
+  Future<void> insertFavoriteCoffee(FavoriteCoffeeModel newFavorite) async {
+    await database.favoriteCoffeeDao.insertFavoriteCoffee(newFavorite);
   }
 
   @override
-  Future<void> deleteFavoriteCoffee(FavoriteCoffeeModel newFavorite) {
-    // TODO: implement deleteFavoriteCoffee
-    throw UnimplementedError();
+  Future<void> deleteFavoriteCoffee(FavoriteCoffeeModel formerFavorite) async {
+    await database.favoriteCoffeeDao.deleteFavoriteCoffee(formerFavorite);
   }
 
   @override
-  Future<void> insertFavoriteCoffee(FavoriteCoffeeModel newFavorite) {
-    // TODO: implement insertFavoriteCoffee
-    throw UnimplementedError();
+  Future<List<FavoriteCoffeeModel>> checkFavoriteCoffee(
+    FavoriteCoffeeModel checkCoffeeModel,
+  ) {
+    return database.favoriteCoffeeDao
+        .checkFavoriteCoffee(checkCoffeeModel.imageUrl);
   }
 }
 
@@ -37,20 +37,15 @@ class DatabaseDaoFake extends DatabaseDaoWrapper {
   DatabaseDaoFake(super.database);
 
   @override
-  Future<void> checkFavoriteCoffee(FavoriteCoffeeModel newFavorite) {
-    // TODO: implement checkFavoriteCoffee
-    throw UnimplementedError();
-  }
+  Future<void> insertFavoriteCoffee(FavoriteCoffeeModel newFavorite) async {}
 
   @override
-  Future<void> deleteFavoriteCoffee(FavoriteCoffeeModel newFavorite) {
-    // TODO: implement deleteFavoriteCoffee
-    throw UnimplementedError();
-  }
+  Future<void> deleteFavoriteCoffee(FavoriteCoffeeModel formerFavorite) async {}
 
   @override
-  Future<void> insertFavoriteCoffee(FavoriteCoffeeModel newFavorite) {
-    // TODO: implement insertFavoriteCoffee
-    throw UnimplementedError();
+  Future<List<FavoriteCoffeeModel>> checkFavoriteCoffee(
+    FavoriteCoffeeModel checkCoffeeModel,
+  ) async {
+    return List<FavoriteCoffeeModel>.empty();
   }
 }
