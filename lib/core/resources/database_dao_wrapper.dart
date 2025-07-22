@@ -33,8 +33,8 @@ class DatabaseDaoReal extends DatabaseDaoWrapper {
   }
 }
 
-class DatabaseDaoFake extends DatabaseDaoWrapper {
-  DatabaseDaoFake(super.database);
+class DatabaseDaoTest extends DatabaseDaoWrapper {
+  DatabaseDaoTest(super.database);
 
   @override
   Future<void> insertFavoriteCoffee(FavoriteCoffeeModel newFavorite) async {}

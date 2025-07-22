@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RandomCoffeeCard extends StatelessWidget {
@@ -25,6 +26,16 @@ class RandomCoffeeCard extends StatelessWidget {
               ? Image.network(
                   imageUrl!,
                   fit: BoxFit.cover,
+                  errorBuilder: (
+                    BuildContext context,
+                    Object exception,
+                    StackTrace? stackTrace,
+                  ) {
+                    if (kDebugMode) {
+                      return const Placeholder();
+                    }
+                    return Image.asset('assets/images/placeholder_512px.png');
+                  },
                 )
               : Container(
                   height: 250,

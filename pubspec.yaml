@@ -31,8 +31,8 @@ dev_dependencies:
   floor_generator: ^1.4.2
   flutter_test:
     sdk: flutter
-  mocktail: ^1.0.4
-  mocktail_image_network: ^1.2.0
+  mocktail: ^1.0.0
+  mocktail_image_network: ^1.0.0
   very_good_analysis: ^6.0.0
 
 flutter:

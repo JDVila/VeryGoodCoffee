@@ -25,7 +25,7 @@ This app was built using BLoC state management, Clean Architecture for concern s
 8. Press the bottom navigation bar button entitled "Random Coffee" with the coffee icon to get a new image
 9. Press the button entitled "Get New Coffee Image" to receive a new Random Coffee Image from the web
 
-<img src="images/1.png" alt="Random Coffee Tab" width="200"/><img src="images/2.png" alt="Marked Favorite" width="200"/><img src="images/3.png" alt="Favorites Tab" width="200"/><img src="images/4.png" alt="New Random Image" width="200"/>
+<img src="readme_images/1.png" alt="Random Coffee Tab" width="200"/><img src="readme_images/2.png" alt="Marked Favorite" width="200"/><img src="readme_images/3.png" alt="Favorites Tab" width="200"/><img src="readme_images/4.png" alt="New Random Image" width="200"/>
 
 ## Running Tests 🧪
 Currently, there are only 3 widget tests, and they are currently not working due to a known issue with mocking the database involving a FakeTimer and SQLite. I encounted the same problem with accessing the API, but faked it with a wrapper class. I could not make a Database wrapper in time due to time constrants. The three tests intend to test:

@@ -22,8 +22,8 @@ class DioReal extends DioWrapper {
   }
 }
 
-class DioFake extends DioWrapper {
-  DioFake(
+class DioTest extends DioWrapper {
+  DioTest(
     this.dio,
   );
   final Dio dio;

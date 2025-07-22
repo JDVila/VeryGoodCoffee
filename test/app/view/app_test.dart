@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,7 +35,7 @@ void main() {
         database,
       )
       ..registerSingleton<DatabaseDaoWrapper>(
-        DatabaseDaoFake(sl()),
+        DatabaseDaoTest(sl()),
       )
       ..registerSingleton<FavoriteCoffeeRepository>(
         FavoriteCoffeeRepositoryImpl(
@@ -48,7 +46,7 @@ void main() {
         Dio.new,
       )
       ..registerSingleton<DioWrapper>(
-        DioFake(
+        DioTest(
           sl(),
         ),
       )
@@ -115,7 +113,7 @@ void main() {
   group('App', () {
     testWidgets('renders App', (tester) async {
       await mockNetworkImages(
-        () async => tester.pumpWidget(
+        () => tester.pumpWidget(
           const App(),
         ),
       );
@@ -125,21 +123,29 @@ void main() {
 
     testWidgets('checks Coffee Viewer Navigation Button', (tester) async {
       await mockNetworkImages(
-        () async => tester.pumpWidget(
+        () => tester.pumpWidget(
           const App(),
         ),
       );
       final randomNavButton = find.text('Random Coffee');
       await tester.tap(randomNavButton);
-      await tester.pump();
+      await tester.pump(); // initial build
+      await tester.pump(Duration.zero); // let microtasks resolve
+      await tester.pump(const Duration(seconds: 1)); // allow animation
       expect(find.text('Coffee Viewer'), findsOneWidget);
     });
 
     testWidgets('checks Coffee Favorites Navigation Button', (tester) async {
-      await tester.pumpWidget(const App());
+      await mockNetworkImages(
+        () => tester.pumpWidget(
+          const App(),
+        ),
+      );
       final favoriteNavButton = find.text('Favorite Coffees');
       await tester.tap(favoriteNavButton);
-      await tester.pump();
+      await tester.pump(); // initial build
+      await tester.pump(Duration.zero); // let microtasks resolve
+      await tester.pump(const Duration(seconds: 10)); // allow animation
       expect(find.text('Coffee Favorites'), findsOneWidget);
     });
   });
