@@ -32,13 +32,11 @@ Future<void> initializeDependencies() async {
       database,
     )
     ..registerSingleton<DatabaseDaoWrapper>(
-      sl(),
+      DatabaseDaoReal(sl()),
     )
     ..registerSingleton<FavoriteCoffeeRepository>(
       FavoriteCoffeeRepositoryImpl(
-        databaseDaoWrapper: DatabaseDaoReal(
-          sl(),
-        ),
+        databaseDaoWrapper: sl(),
       ),
     )
     ..registerSingleton<Dio>(

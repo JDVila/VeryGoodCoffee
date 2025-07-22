@@ -34,13 +34,11 @@ void main() {
         database,
       )
       ..registerSingleton<DatabaseDaoWrapper>(
-        sl(),
+        DatabaseDaoFake(sl()),
       )
       ..registerSingleton<FavoriteCoffeeRepository>(
         FavoriteCoffeeRepositoryImpl(
-          databaseDaoWrapper: DatabaseDaoFake(
-            sl(),
-          ),
+          databaseDaoWrapper: sl(),
         ),
       )
       ..registerFactory<Dio>(
