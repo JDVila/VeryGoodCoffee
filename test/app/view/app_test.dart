@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
+import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:verygoodcoffee/core/resources/database_dao_wrapper.dart';
 import 'package:verygoodcoffee/core/resources/dio_wrapper.dart';
 import 'package:verygoodcoffee/features/app/app.dart';
@@ -111,13 +114,21 @@ void main() {
   });
   group('App', () {
     testWidgets('renders App', (tester) async {
-      await tester.pumpWidget(const App());
+      await mockNetworkImages(
+        () async => tester.pumpWidget(
+          const App(),
+        ),
+      );
       expect(find.byIcon(Icons.coffee), findsOneWidget);
       expect(find.byIcon(Icons.favorite), findsOneWidget);
     });
 
     testWidgets('checks Coffee Viewer Navigation Button', (tester) async {
-      await tester.pumpWidget(const App());
+      await mockNetworkImages(
+        () async => tester.pumpWidget(
+          const App(),
+        ),
+      );
       final randomNavButton = find.text('Random Coffee');
       await tester.tap(randomNavButton);
       await tester.pump();

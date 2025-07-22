@@ -31,7 +31,7 @@ class DioFake extends DioWrapper {
   @override
   Future<Map<String, dynamic>> get(String url) async {
     final fakeResponse = {
-      'file': 'https://coffee.alexflipnote.dev/lEnU7VrzuoU_coffee.jpg'
+      'file': 'https://coffee.alexflipnote.dev/-ohqDCldco4_coffee.png',
     };
     return {'data': fakeResponse, 'statusCode': 200};
   }
