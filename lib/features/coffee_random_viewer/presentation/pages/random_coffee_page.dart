@@ -6,27 +6,13 @@ import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/bloc/f
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/bloc/random_coffee_bloc/random_coffee_bloc.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/widgets/random_coffee_card_widget.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/widgets/random_coffee_error_widget.dart';
-import 'package:verygoodcoffee/injection_container.dart';
 
 class RandomCoffeePage extends StatelessWidget {
   const RandomCoffeePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => sl.get<RandomCoffeeBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => sl.get<FavoriteCoffeeBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => sl.get<FavoriteCoffeeButtonCubit>(),
-        ),
-      ],
-      child: const RandomCoffeeView(),
-    );
+    return const RandomCoffeeView();
   }
 }
 
@@ -41,8 +27,13 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
   @override
   void initState() {
     super.initState();
-    context.read<RandomCoffeeBloc>().add(
-          LoadRandomCoffee(),
+    if (context.mounted) {
+      context.read<RandomCoffeeBloc>().add(
+            LoadRandomCoffee(),
+          );
+    }
+    context.read<FavoriteCoffeeBloc>().add(
+          const FavoriteCoffeeReset(),
         );
   }
 
@@ -79,13 +70,21 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
                         context.read<RandomCoffeeBloc>().add(
                               LoadRandomCoffee(),
                             );
+                        context.read<FavoriteCoffeeBloc>().add(
+                              const FavoriteCoffeeReset(),
+                            );
                       },
                     ),
                   RandomCoffeeError => RandomCoffeeErrorWidget(
                       isInternetError: false,
                       onPressed: () async {
-                        context.read<RandomCoffeeBloc>().add(
-                              LoadRandomCoffee(),
+                        if (context.mounted) {
+                          context.read<RandomCoffeeBloc>().add(
+                                LoadRandomCoffee(),
+                              );
+                        }
+                        context.read<FavoriteCoffeeBloc>().add(
+                              const FavoriteCoffeeReset(),
                             );
                       },
                     ),
@@ -106,22 +105,46 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
                                       .state,
                                   onPressed: () {},
                                 ),
-                              RandomCoffeeLoaded => RandomCoffeeCard(
-                                  isPressed: context
-                                      .watch<FavoriteCoffeeButtonCubit>()
-                                      .state,
-                                  imageUrl: state.entity.imageUrl,
-                                  fileName: state.entity.fileName,
-                                  onPressed: () {
-                                    context.read<FavoriteCoffeeBloc>().add(
-                                          ClickFavoriteCoffee(
-                                            entity: FavoriteCoffeeEntity(
-                                              imageUrl: state.entity.imageUrl,
-                                              fileName: state.entity.fileName,
-                                            ),
-                                          ),
-                                        );
+                              RandomCoffeeLoaded => BlocListener<
+                                    FavoriteCoffeeBloc, FavoriteCoffeeState>(
+                                  listener: (
+                                    favoriteCoffeeContext,
+                                    favoriteCoffeeState,
+                                  ) {
+                                    if (favoriteCoffeeState
+                                        is FavoriteCoffeeAdded) {
+                                      context
+                                          .read<FavoriteCoffeeButtonCubit>()
+                                          .clickButton(
+                                            isPressed: true,
+                                          );
+                                    }
+                                    if (favoriteCoffeeState
+                                            is FavoriteCoffeeRemoved ||
+                                        favoriteCoffeeState
+                                            is FavoriteCoffeeInitial) {
+                                      context
+                                          .read<FavoriteCoffeeButtonCubit>()
+                                          .clickButton();
+                                    }
                                   },
+                                  child: RandomCoffeeCard(
+                                    isPressed: context
+                                        .watch<FavoriteCoffeeButtonCubit>()
+                                        .state,
+                                    imageUrl: state.entity.imageUrl,
+                                    fileName: state.entity.fileName,
+                                    onPressed: () {
+                                      context.read<FavoriteCoffeeBloc>().add(
+                                            ClickFavoriteCoffee(
+                                              entity: FavoriteCoffeeEntity(
+                                                imageUrl: state.entity.imageUrl,
+                                                fileName: state.entity.fileName,
+                                              ),
+                                            ),
+                                          );
+                                    },
+                                  ),
                                 ),
                               _ => const SizedBox.shrink(),
                             },

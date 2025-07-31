@@ -9,10 +9,7 @@ class FavoriteCoffeesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CoffeeFavoritesBloc(),
-      child: const FavoriteCoffeesView(),
-    );
+    return const FavoriteCoffeesView();
   }
 }
 

@@ -31,75 +31,7 @@ Future<void> initializeDependencies() async {
     ..registerSingleton<AppDatabase>(
       database,
     )
-    ..registerSingleton<DatabaseDaoWrapper>(
-      DatabaseDaoReal(sl()),
-    )
-    ..registerSingleton<FavoriteCoffeeRepository>(
-      FavoriteCoffeeRepositoryImpl(
-        databaseDaoWrapper: sl(),
-      ),
-    )
     ..registerSingleton<Dio>(
       Dio(),
-    )
-    ..registerSingleton<DioWrapper>(
-      DioReal(
-        sl(),
-      ),
-    )
-    ..registerSingleton<RandomCoffeeService>(
-      RandomCoffeeService(
-        sl(),
-      ),
-    )
-    ..registerSingleton<RandomCoffeeRepository>(
-      RandomCoffeeRespositoryImpl(
-        service: sl(),
-      ),
-    )
-    ..registerSingleton<GetRandomCoffeeUseCase>(
-      GetRandomCoffeeUseCase(
-        sl(),
-      ),
-    )
-    ..registerSingleton<AddFavoriteCoffeeUseCase>(
-      AddFavoriteCoffeeUseCase(
-        sl(),
-      ),
-    )
-    ..registerSingleton<RemoveFavoriteCoffeeUseCase>(
-      RemoveFavoriteCoffeeUseCase(
-        sl(),
-      ),
-    )
-    ..registerSingleton<CheckFavoriteCoffeeUseCase>(
-      CheckFavoriteCoffeeUseCase(
-        sl(),
-      ),
-    )
-    ..registerSingleton<RandomCoffeeBloc>(
-      RandomCoffeeBloc(),
-    )
-    ..registerSingleton<FavoriteCoffeeBloc>(
-      FavoriteCoffeeBloc(),
-    )
-    ..registerSingleton<FavoriteCoffeeButtonCubit>(
-      FavoriteCoffeeButtonCubit(),
-    )
-    ..registerSingleton<AppPageNavigationCubit>(
-      AppPageNavigationCubit(),
-    )
-    ..registerSingleton<FavoriteCoffeesRepository>(
-      FavoriteCoffeesRepositoryImpl(
-        database: sl(),
-      ),
-    )
-    ..registerSingleton<GetAllFavoriteCoffeesUseCase>(
-      GetAllFavoriteCoffeesUseCase(
-        sl(),
-      ),
-    )
-    ..registerSingleton<CoffeeFavoritesBloc>(
-      CoffeeFavoritesBloc(),
     );
 }

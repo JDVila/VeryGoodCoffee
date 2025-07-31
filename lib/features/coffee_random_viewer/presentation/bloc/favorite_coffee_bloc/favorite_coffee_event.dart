@@ -6,6 +6,12 @@ sealed class FavoriteCoffeeEvent {
   final FavoriteCoffeeEntity entity;
 }
 
+class FavoriteCoffeeReset extends FavoriteCoffeeEvent {
+  const FavoriteCoffeeReset({
+    super.entity = const FavoriteCoffeeEntity(imageUrl: ''),
+  });
+}
+
 class ClickFavoriteCoffee extends FavoriteCoffeeEvent {
   const ClickFavoriteCoffee({required super.entity});
 }
