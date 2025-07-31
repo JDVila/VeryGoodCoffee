@@ -18,7 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   focus_on_it: ^2.0.1
-  get_it: ^8.0.3
+  get_it: ^8.1.0
   http: ^1.4.0
   intl: 0.20.2
   lock_orientation_screen: ^0.0.4
