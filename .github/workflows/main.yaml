@@ -23,6 +23,7 @@ jobs:
     with:
       flutter_channel: stable
       format_line_length: 150
+      test_recursion: true
   spell-check:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
     with:
