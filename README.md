@@ -53,7 +53,7 @@ There are two wrapper classes for both Dio and the Database DAO to allow for moc
 Due to time constraints, there are no unit tests. However, all of the classes follow the Dependency Inversion Principle (DIP), making them easy to inject state with the Provider and BLoC patterns, and making them easier to test.
 
 ## Known Issues
-Although Github Actions are back up and running for both `main` and `post_submission_updates`, there is a flaky test which fails due to line length issues with formatting which do not appear on my local machine, however, I am still very new to Github Actions, so I am unable to fix it at this time.
+Although git hub Actions are back up and running for both `main` and `post_submission_updates`, there is a flaky test which fails due to line length issues with formatting which do not appear on my local machine, however, I am still very new to git hub Actions, so I am unable to fix it at this time.
 
 ## Next Steps 🪜
 1. Add the ability to remove favorites directly from the favorites list
