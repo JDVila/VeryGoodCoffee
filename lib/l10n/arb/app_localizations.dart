@@ -102,7 +102,13 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Counter'**
-  String get counterAppBarTitle;
+  String get coffeeViewer;
+  String get getNewCoffeeImage;
+  String get coffeeFavorites;
+  String get photoFilename;
+  String get noInternetConnection;
+  String get unknownError;
+  String get tapToTryAgain;
 }
 
 class _AppLocalizationsDelegate

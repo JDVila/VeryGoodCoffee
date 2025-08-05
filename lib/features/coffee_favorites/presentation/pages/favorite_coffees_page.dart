@@ -20,8 +20,7 @@ class FavoriteCoffeesView extends StatefulWidget {
   State<FavoriteCoffeesView> createState() => _FavoriteCoffeesViewState();
 }
 
-class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
-    with AutomaticKeepAliveClientMixin {
+class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView> {
   @override
   void initState() {
     context.read<CoffeeFavoritesBloc>().add(
@@ -32,7 +31,6 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return SafeArea(
       child: Card(
         color: Colors.white,
@@ -97,7 +95,4 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => false;
 }
