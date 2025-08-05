@@ -22,7 +22,7 @@ jobs:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
     with:
       flutter_channel: stable
-      coverage_exludes: "lib/l10n/arb/app_localizations.dart"
+      coverage_excludes: '**/app_localizations.dart'
 
   spell-check:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
