@@ -9,5 +9,8 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get counterAppBarTitle => 'Contador';
+  String get getNewCoffeeImage => 'Get New Coffee Image';
+
+  @override
+  String get coffeeFavorites => 'Coffee Favorites';
 }
