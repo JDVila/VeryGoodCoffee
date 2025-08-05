@@ -22,20 +22,20 @@ final class RandomCoffeeLoading extends RandomCoffeeState {
   });
 }
 
-final class RandomCoffeeLoaded extends RandomCoffeeState {
-  const RandomCoffeeLoaded({required super.entity});
+final class RandomCoffeeSuccess extends RandomCoffeeState {
+  const RandomCoffeeSuccess({required super.entity});
 }
 
-final class RandomCoffeeError extends RandomCoffeeState {
-  const RandomCoffeeError({
+final class RandomCoffeeFailure extends RandomCoffeeState {
+  const RandomCoffeeFailure({
     super.entity = const RandomCoffeeEntity(
       imageUrl: '',
     ),
   });
 }
 
-final class RandomCoffeeNoInternet extends RandomCoffeeState {
-  const RandomCoffeeNoInternet({
+final class RandomCoffeeInternetFailure extends RandomCoffeeState {
+  const RandomCoffeeInternetFailure({
     super.entity = const RandomCoffeeEntity(
       imageUrl: '',
     ),

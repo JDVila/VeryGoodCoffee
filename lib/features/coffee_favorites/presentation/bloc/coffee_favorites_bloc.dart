@@ -11,7 +11,7 @@ class CoffeeFavoritesBloc
     extends Bloc<CoffeeFavoritesEvent, CoffeeFavoritesState> {
   CoffeeFavoritesBloc(this.getAllFavoriteCoffeesUseCase)
       : super(const CoffeeFavoritesInitial()) {
-    on<LoadCoffeeFavoritesList>(_getCoffeeFavoritesList);
+    on<FavoritesListLoad>(_getCoffeeFavoritesList);
   }
 
   final GetAllFavoriteCoffeesUseCase getAllFavoriteCoffeesUseCase;
@@ -26,13 +26,13 @@ class CoffeeFavoritesBloc
     final list = await getAllFavoriteCoffeesUseCase.getAllFavoriteCoffees();
     if (list is DataSuccess) {
       emit(
-        CoffeeFavoritesListLoaded(
+        CoffeeFavoritesListSuccess(
           entityList: List.from(list.data!),
         ),
       );
     } else {
       emit(
-        CoffeeFavoritesListError(errorMsg: list.errorMessage),
+        CoffeeFavoritesListFailure(errorMsg: list.errorMessage),
       );
     }
   }

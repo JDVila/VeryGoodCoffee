@@ -12,6 +12,6 @@ class FavoriteCoffeeReset extends FavoriteCoffeeEvent {
   });
 }
 
-class ClickFavoriteCoffee extends FavoriteCoffeeEvent {
-  const ClickFavoriteCoffee({required super.entity});
+class FavoriteCoffeeClicked extends FavoriteCoffeeEvent {
+  const FavoriteCoffeeClicked({required super.entity});
 }

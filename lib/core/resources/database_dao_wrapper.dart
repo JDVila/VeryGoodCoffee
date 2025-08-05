@@ -9,6 +9,7 @@ abstract class DatabaseDaoWrapper {
   Future<List<FavoriteCoffeeModel>> checkFavoriteCoffee(
     FavoriteCoffeeModel checkCoffeeModel,
   );
+  Future<List<FavoriteCoffeeModel>> getAllFavoriteCoffees();
 }
 
 class DatabaseDaoReal extends DatabaseDaoWrapper {
@@ -16,12 +17,12 @@ class DatabaseDaoReal extends DatabaseDaoWrapper {
 
   @override
   Future<void> insertFavoriteCoffee(FavoriteCoffeeModel newFavorite) async {
-    await database.favoriteCoffeeDao.insertFavoriteCoffee(newFavorite);
+    return database.favoriteCoffeeDao.insertFavoriteCoffee(newFavorite);
   }
 
   @override
   Future<void> deleteFavoriteCoffee(FavoriteCoffeeModel formerFavorite) async {
-    await database.favoriteCoffeeDao.deleteFavoriteCoffee(formerFavorite);
+    return database.favoriteCoffeeDao.deleteFavoriteCoffee(formerFavorite);
   }
 
   @override
@@ -30,6 +31,11 @@ class DatabaseDaoReal extends DatabaseDaoWrapper {
   ) {
     return database.favoriteCoffeeDao
         .checkFavoriteCoffee(checkCoffeeModel.imageUrl);
+  }
+
+  @override
+  Future<List<FavoriteCoffeeModel>> getAllFavoriteCoffees() {
+    return database.favoriteCoffeeDao.getAllFavoriteCoffees();
   }
 }
 
@@ -47,5 +53,15 @@ class DatabaseDaoTest extends DatabaseDaoWrapper {
     FavoriteCoffeeModel checkCoffeeModel,
   ) async {
     return List<FavoriteCoffeeModel>.empty();
+  }
+
+  @override
+  Future<List<FavoriteCoffeeModel>> getAllFavoriteCoffees() async {
+    return [
+      const FavoriteCoffeeModel(
+        imageUrl: 'https://coffee.alexflipnote.dev/-ohqDCldco4_coffee.png',
+        fileName: '-ohqDCldco4_coffee.png',
+      ),
+    ];
   }
 }

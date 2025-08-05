@@ -6,7 +6,6 @@ import 'package:verygoodcoffee/features/coffee_random_viewer/domain/entities/fav
 import 'package:verygoodcoffee/features/coffee_random_viewer/domain/use_cases/add_favorite_coffee_use_case.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/domain/use_cases/check_favorite_coffee_use_case.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/domain/use_cases/remove_favorite_coffee_use_case.dart';
-import 'package:verygoodcoffee/injection_container.dart';
 
 part 'favorite_coffee_event.dart';
 part 'favorite_coffee_state.dart';
@@ -23,7 +22,7 @@ class FavoriteCoffeeBloc
       ) =>
           emit(FavoriteCoffeeInitial()),
     );
-    on<ClickFavoriteCoffee>(_clickFavoriteCoffee);
+    on<FavoriteCoffeeClicked>(_clickFavoriteCoffee);
   }
   final CheckFavoriteCoffeeUseCase checkFavoriteCoffeeUseCase;
   final AddFavoriteCoffeeUseCase addFavoriteCoffeeUseCase;
@@ -41,7 +40,7 @@ class FavoriteCoffeeBloc
     );
     if (favoriteStatus is DataFailure) {
       emit(
-        FavoriteCoffeeButtonLoadError(),
+        FavoriteCoffeeError(),
       );
     }
     final isAlreadyFavorite = favoriteStatus.data ?? false;

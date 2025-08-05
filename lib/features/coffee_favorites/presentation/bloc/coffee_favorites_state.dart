@@ -16,10 +16,11 @@ final class CoffeeFavoritesListLoading extends CoffeeFavoritesState {
   const CoffeeFavoritesListLoading({super.entityList = const []});
 }
 
-final class CoffeeFavoritesListLoaded extends CoffeeFavoritesState {
-  const CoffeeFavoritesListLoaded({required super.entityList});
+final class CoffeeFavoritesListSuccess extends CoffeeFavoritesState {
+  const CoffeeFavoritesListSuccess({required super.entityList});
 }
 
-final class CoffeeFavoritesListError extends CoffeeFavoritesState {
-  const CoffeeFavoritesListError({super.entityList = const [], super.errorMsg});
+final class CoffeeFavoritesListFailure extends CoffeeFavoritesState {
+  const CoffeeFavoritesListFailure(
+      {super.entityList = const [], super.errorMsg});
 }

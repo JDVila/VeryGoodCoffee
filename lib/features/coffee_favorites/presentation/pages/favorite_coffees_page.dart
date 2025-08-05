@@ -25,7 +25,7 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
   @override
   void initState() {
     context.read<CoffeeFavoritesBloc>().add(
-          LoadCoffeeFavoritesList(),
+          FavoritesListLoad(),
         );
     super.initState();
   }
@@ -41,7 +41,7 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
             return switch (state) {
               CoffeeFavoritesInitial() => Container(),
               CoffeeFavoritesListLoading() => const CircularProgressIndicator(),
-              CoffeeFavoritesListLoaded() => Column(
+              CoffeeFavoritesListSuccess() => Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Card(
@@ -64,7 +64,7 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
                       child: RefreshIndicator(
                         onRefresh: () async {
                           context.read<CoffeeFavoritesBloc>().add(
-                                LoadCoffeeFavoritesList(),
+                                FavoritesListLoad(),
                               );
                         },
                         child: ListView.builder(
@@ -83,11 +83,11 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
                     ),
                   ],
                 ),
-              CoffeeFavoritesListError() => RandomCoffeeErrorWidget(
+              CoffeeFavoritesListFailure() => RandomCoffeeErrorWidget(
                   isInternetError: false,
                   onPressed: () {
                     context.read<CoffeeFavoritesBloc>().add(
-                          LoadCoffeeFavoritesList(),
+                          FavoritesListLoad(),
                         );
                   },
                 ),

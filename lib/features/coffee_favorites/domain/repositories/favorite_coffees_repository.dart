@@ -1,11 +1,11 @@
 import 'package:verygoodcoffee/core/resources/data_state.dart';
-import 'package:verygoodcoffee/features/coffee_random_viewer/data/local/app_database.dart';
+import 'package:verygoodcoffee/core/resources/database_dao_wrapper.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/data/models/favorite_coffee_model.dart';
 
 abstract class FavoriteCoffeesRepository {
-  const FavoriteCoffeesRepository({required this.database});
+  const FavoriteCoffeesRepository({required this.databaseDaoWrapper});
 
-  final AppDatabase database;
+  final DatabaseDaoWrapper databaseDaoWrapper;
 
   Future<DataState<List<FavoriteCoffeeModel>>> getFavoriteCoffees();
 }

@@ -11,4 +11,4 @@ final class FavoriteCoffeeAdded extends FavoriteCoffeeState {}
 
 final class FavoriteCoffeeRemoved extends FavoriteCoffeeState {}
 
-final class FavoriteCoffeeButtonLoadError extends FavoriteCoffeeState {}
+final class FavoriteCoffeeError extends FavoriteCoffeeState {}

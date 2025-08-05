@@ -19,7 +19,7 @@ class RandomCoffeeBloc extends Bloc<RandomCoffeeEvent, RandomCoffeeState> {
   ) : super(
           const RandomCoffeeInitial(),
         ) {
-    on<LoadRandomCoffee>(_loadCoffeeImage);
+    on<RandomCoffeeLoad>(_loadCoffeeImage);
   }
   final GetRandomCoffeeUseCase getRandomCoffeeUseCase;
   final CheckFavoriteCoffeeUseCase checkFavoriteCoffeeUseCase;
@@ -51,7 +51,7 @@ class RandomCoffeeBloc extends Bloc<RandomCoffeeEvent, RandomCoffeeState> {
         );
       }
       emit(
-        RandomCoffeeLoaded(entity: newEntity),
+        RandomCoffeeSuccess(entity: newEntity),
       );
     }
   }
