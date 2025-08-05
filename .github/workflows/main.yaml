@@ -8,9 +8,11 @@ on:
   push:
     branches:
       - main
+      - post_submission_updates
   pull_request:
     branches:
       - main
+      - post_submission_updates
 
 jobs:
   semantic-pull-request:
