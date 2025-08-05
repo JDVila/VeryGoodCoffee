@@ -38,14 +38,18 @@ This app was built using BLoC state management, Clean Architecture for concern s
 <img src="readme_images/1.png" alt="Random Coffee Tab" width="200"/><img src="readme_images/2.png" alt="Marked Favorite" width="200"/><img src="readme_images/3.png" alt="Favorites Tab" width="200"/><img src="readme_images/4.png" alt="New Random Image" width="200"/>
 
 ## Running Tests 🧪
-Currently, there are only 3 widget tests, and they are currently not working due to a known issue with mocking the database involving a FakeTimer and SQLite. I encounted the same problem with accessing the API, but faked it with a wrapper class. I could not make a Database wrapper in time due to time constrants. The three tests intend to test:
-1. That the app loads as expected
-2. That the left bottom navigation bar button works as expected
-3. That the right bottom navigation bar button works as expected
+Currently, there are 6 widget tests.
 
 ## Next Steps 🪜
-1. Build a wrapper for the database to fake / mock for tests
-2. Add the ability to remove favorites directly from the favorites list
-3. Check for internet connectivity, and fail gracefully to account for this
-4. Add Email / Text / Social Share capabilities
-5. Add more Widget Tests and Unit Tests
+1. Add the ability to remove favorites directly from the favorites list
+2. Check for internet connectivity, and fail gracefully to account for this
+3. Add Email / Text / Social Share capabilities
+
+[coverage_badge]: coverage_badge.svg
+[flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
+[internationalization_link]: https://flutter.dev/docs/development/accessibility-and-localization/internationalization
+[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license_link]: https://opensource.org/licenses/MIT
+[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
+[very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
+[very_good_cli_link]: https://github.com/VeryGoodOpenSource/very_good_cli
