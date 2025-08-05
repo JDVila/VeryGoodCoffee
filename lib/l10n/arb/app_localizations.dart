@@ -59,8 +59,7 @@ import 'app_localizations_es.dart';
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the
-/// AppLocalizations.supportedLocales
+/// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
   AppLocalizations(String locale)
@@ -78,9 +77,8 @@ abstract class AppLocalizations {
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
   ///
-  /// Returns a list of localizations delegates containing this delegate
-  /// along with GlobalMaterialLocalizations.delegate,
-  /// GlobalCupertinoLocalizations.delegate,
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
   /// and GlobalWidgetsLocalizations.delegate.
   ///
   /// Additional delegates can be added by appending to this list in
@@ -100,8 +98,11 @@ abstract class AppLocalizations {
     Locale('es')
   ];
 
-  String get getNewCoffeeImage;
-  String get coffeeFavorites;
+  /// Text shown in the AppBar of the Counter Page
+  ///
+  /// In en, this message translates to:
+  /// **'Counter'**
+  String get counterAppBarTitle;
 }
 
 class _AppLocalizationsDelegate
@@ -131,8 +132,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-      '''AppLocalizations.delegate failed to load unsupported locale "$locale". 
-      This is likely an issue with the localizations generation tool. Please 
-      file an issue on GitHub with a reproducible sample app and the gen-l10n 
-      configuration that was used.''');
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }
