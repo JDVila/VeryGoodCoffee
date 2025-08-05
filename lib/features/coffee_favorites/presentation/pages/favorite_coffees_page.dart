@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verygoodcoffee/features/coffee_favorites/presentation/bloc/coffee_favorites_bloc.dart';
 import 'package:verygoodcoffee/features/coffee_favorites/presentation/widgets/favorite_coffee_card.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/widgets/random_coffee_error_widget.dart';
+import 'package:verygoodcoffee/l10n/arb/app_localizations.dart';
 
 class FavoriteCoffeesPage extends StatelessWidget {
   const FavoriteCoffeesPage({super.key});
@@ -42,14 +43,14 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView> {
               CoffeeFavoritesListSuccess() => Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Card(
+                    Card(
                       color: Colors.deepPurple,
                       child: Center(
                         child: Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           child: Text(
-                            'Coffee Favorites',
-                            style: TextStyle(
+                            AppLocalizations.of(context).coffeeFavorites,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:verygoodcoffee/l10n/arb/app_localizations.dart';
 
 class FavoriteCoffeeCard extends StatelessWidget {
   const FavoriteCoffeeCard({
@@ -30,8 +31,8 @@ class FavoriteCoffeeCard extends StatelessWidget {
                 ),
         ),
         ListTile(
-          title: const Text(
-            'Photo Filename:',
+          title: Text(
+            AppLocalizations.of(context).photoFilename,
           ),
           subtitle: Text('$fileName'),
         ),

@@ -6,6 +6,7 @@ import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/bloc/f
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/bloc/random_coffee_bloc/random_coffee_bloc.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/widgets/random_coffee_card_widget.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/widgets/random_coffee_error_widget.dart';
+import 'package:verygoodcoffee/l10n/arb/app_localizations.dart';
 
 class RandomCoffeePage extends StatelessWidget {
   const RandomCoffeePage({super.key});
@@ -42,14 +43,14 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
             color: Colors.white,
             child: Column(
               children: [
-                const Card(
+                Card(
                   color: Colors.deepPurple,
                   child: Center(
                     child: Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Text(
-                        'Coffee Viewer',
-                        style: TextStyle(
+                        AppLocalizations.of(context).coffeeViewer,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -150,7 +151,9 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Text('Get New Coffee Image'),
+                          child: Text(
+                            AppLocalizations.of(context).getNewCoffeeImage,
+                          ),
                           onPressed: () {
                             BlocProvider.of<RandomCoffeeBloc>(
                               context,

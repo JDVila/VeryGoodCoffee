@@ -155,14 +155,16 @@ class _AppState extends State<App> {
                                   );
                             },
                             backgroundColor: Colors.white,
-                            items: const <BottomNavigationBarItem>[
+                            items: <BottomNavigationBarItem>[
                               BottomNavigationBarItem(
-                                icon: Icon(Icons.coffee),
-                                label: 'Random Coffee',
+                                icon: const Icon(Icons.coffee),
+                                label:
+                                    AppLocalizations.of(context).randomCoffee,
                               ),
                               BottomNavigationBarItem(
-                                icon: Icon(Icons.favorite),
-                                label: 'Favorite Coffees',
+                                icon: const Icon(Icons.favorite),
+                                label: AppLocalizations.of(context)
+                                    .favoriteCoffees,
                               ),
                             ],
                           ),

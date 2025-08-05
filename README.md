@@ -22,7 +22,9 @@ The following steps detail how to get started:
 5. Run the following command in the working directory through the terminal: `flutter run --flavor development --target lib/main_development.dart`
 6. Interact and have fun with the app!
 
-This app was built using BLoC state management, Clean Architecture for concern separation, and Get_it for Dependency Injection and Source Location.
+There are three flavors for the app: development, staging, and production - all of which should execute at this time. There are also English and Spanish ARB files for localization.
+
+This app was built using BLoC state management, Clean Architecture for concern separation, and the Provider pattern for dependency management
 
 ## Using the App in the Simulator / Emulator 📱
 1. Open the App manually by clicking on the app icon, or automatically through VSCode if this is a fresh install
@@ -38,7 +40,20 @@ This app was built using BLoC state management, Clean Architecture for concern s
 <img src="readme_images/1.png" alt="Random Coffee Tab" width="200"/><img src="readme_images/2.png" alt="Marked Favorite" width="200"/><img src="readme_images/3.png" alt="Favorites Tab" width="200"/><img src="readme_images/4.png" alt="New Random Image" width="200"/>
 
 ## Running Tests 🧪
-Currently, there are 6 widget tests.
+Currently, there are 6 widget tests, and all of them pass. These include:
+- renders App
+- checks Coffee Viewer Navigation Button
+- checks Coffee Favorites Navigation Button
+- checks Coffee Favorites Screen is Empty
+- checks Coffee Viewer Add to Favorites Button
+- checks Coffee Favorites Has One Picture
+
+There are two wrapper classes for both Dio and the Database DAO to allow for mocked responses to make widget testing easier.
+
+Due to time constraints, there are no unit tests. However, all of the classes follow the Dependency Inversion Principle (DIP), making them easy to inject state with the Provider and BLoC patterns, and making them easier to test.
+
+## Known Issues
+Although Github Actions are back up and running for both `main` and `post_submission_updates`, there is a flaky test which fails due to line length issues with formatting which do not appear on my local machine, however, I am still very new to Github Actions, so I am unable to fix it at this time.
 
 ## Next Steps 🪜
 1. Add the ability to remove favorites directly from the favorites list
