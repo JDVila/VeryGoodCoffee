@@ -28,4 +28,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get coffeeFavorites => 'Coffee Favorites';
+
+  @override
+  String get randomCoffee => 'Random Coffee';
+
+  @override
+  String get favoriteCoffees => 'Favorite Coffees';
 }

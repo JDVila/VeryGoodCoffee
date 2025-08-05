@@ -1,7 +1,47 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "coffeeViewer": "Coffee Viewer",
+    "@coffeeViewer": {
+        "description": "Text shown in Title of the random image page"
+    },
+    "@@locale": "en",
+    "getNewCoffeeImage": "Get New Coffee Image",
+    "@getNewCoffeeImage": {
+        "description": "Text shown in the button for getting a new random image"
+    },
+    "@@locale": "en",
+    "photoFilename": "Photo Filename:",
+    "@photoFilename": {
+        "description": "Text shown in the card for the photo filename"
+    },
+    "@@locale": "en",
+    "noInternetConnection": "No Internet Connection",
+    "@noInternetConnection": {
+        "description": "Text shown in the card for No Internet Connection"
+    },
+    "@@locale": "en",
+    "unknownError": "Unknown Error",
+    "@unknownError": {
+        "description": "Text shown in the card for an Unknown Error"
+    },
+    "@@locale": "en",
+    "tapToTryAgain": "Tap to Try Again",
+    "@tapToTryAgain": {
+        "description": "Text shown in the button Tap to Try Again"
+    },
+    "@@locale": "en",
+    "coffeeFavorites": "Coffee Favorites",
+    "@coffeeFavorites": {
+        "description": "Text shown in Title of the Favorites Page"
+    },
+    "@@locale": "en",
+    "randomCoffee": "Random Coffee",
+    "@randomCoffee": {
+        "description": "Text shown in the left bottom navigation bar"
+    },
+    "@@locale": "en",
+    "favoriteCoffees": "Favorite Coffees",
+    "@favoriteCoffees": {
+        "description": "Text shown in the right bottom navigation bar"
     }
 }

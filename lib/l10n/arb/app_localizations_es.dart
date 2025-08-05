@@ -9,23 +9,29 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get coffeeViewer => 'Coffee Viewer';
+  String get coffeeViewer => 'Visor de Café';
 
   @override
-  String get getNewCoffeeImage => 'Get New Coffee Image';
+  String get getNewCoffeeImage => 'Obtener Nueva Imagen de Café';
 
   @override
-  String get photoFilename => 'Photo Filename:';
+  String get photoFilename => 'Nombre de Archivo de la Foto:';
 
   @override
-  String get noInternetConnection => 'No Internet Connection';
+  String get noInternetConnection => 'Sin conexión a Internet';
 
   @override
-  String get unknownError => 'Unknown Error';
+  String get unknownError => 'Error desconocido';
 
   @override
-  String get tapToTryAgain => 'Tap to Try Again';
+  String get tapToTryAgain => 'Toca para Volver a Intentarlo';
 
   @override
-  String get coffeeFavorites => 'Coffee Favorites';
+  String get coffeeFavorites => 'Favoritos del Café';
+
+  @override
+  String get randomCoffee => 'Café al Azar';
+
+  @override
+  String get favoriteCoffees => 'Cafés Favoritas';
 }
