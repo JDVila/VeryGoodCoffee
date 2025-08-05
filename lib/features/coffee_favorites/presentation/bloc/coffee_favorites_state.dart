@@ -21,6 +21,8 @@ final class CoffeeFavoritesListSuccess extends CoffeeFavoritesState {
 }
 
 final class CoffeeFavoritesListFailure extends CoffeeFavoritesState {
-  const CoffeeFavoritesListFailure(
-      {super.entityList = const [], super.errorMsg});
+  const CoffeeFavoritesListFailure({
+    super.entityList = const [],
+    super.errorMsg,
+  });
 }

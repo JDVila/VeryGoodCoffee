@@ -12,9 +12,11 @@ part 'favorite_coffee_state.dart';
 
 class FavoriteCoffeeBloc
     extends Bloc<FavoriteCoffeeEvent, FavoriteCoffeeState> {
-  FavoriteCoffeeBloc(this.checkFavoriteCoffeeUseCase,
-      this.addFavoriteCoffeeUseCase, this.removeFavoriteCoffeeUseCase)
-      : super(FavoriteCoffeeInitial()) {
+  FavoriteCoffeeBloc(
+    this.checkFavoriteCoffeeUseCase,
+    this.addFavoriteCoffeeUseCase,
+    this.removeFavoriteCoffeeUseCase,
+  ) : super(FavoriteCoffeeInitial()) {
     on<FavoriteCoffeeReset>(
       (
         event,

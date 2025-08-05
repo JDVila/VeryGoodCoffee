@@ -121,9 +121,6 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
                                   child: BlocBuilder<FavoriteCoffeeButtonCubit,
                                       bool>(
                                     builder: (cubitContext, cubitState) {
-                                      print(BlocProvider.of<RandomCoffeeBloc>(
-                                              context)
-                                          .state);
                                       return RandomCoffeeCard(
                                         isPressed: cubitState,
                                         imageUrl: state.entity.imageUrl,
