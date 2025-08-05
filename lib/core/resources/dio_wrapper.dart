@@ -1,8 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first,
+// one_member_abstracts
 import 'package:dio/dio.dart';
 
 abstract class DioWrapper {
-  Future<List<dynamic>> get(String url);
+  Future<Map<String, dynamic>> get(String url);
 }
 
 class DioReal extends DioWrapper {
@@ -12,25 +13,27 @@ class DioReal extends DioWrapper {
   final Dio dio;
 
   @override
-  Future<List<dynamic>> get(String url) async {
+  Future<Map<String, dynamic>> get(String url) async {
     try {
       final response = await dio.get<Map<String, dynamic>>(url);
-      return [response.data, response.statusCode];
+      return {'data': response.data, 'statusCode': response.statusCode};
     } on DioException catch (e) {
-      return [e.message, e.response?.statusCode];
+      return {'data': e.error.toString(), 'statusCode': e.response?.statusCode};
     }
   }
 }
 
-class DioFake extends DioWrapper {
-  DioFake(
+class DioTest extends DioWrapper {
+  DioTest(
     this.dio,
   );
   final Dio dio;
 
   @override
-  Future<List<dynamic>> get(String url) async {
-    final Map<String, dynamic> map = {'file': 'Map<String, dynamic>{}'};
-    return [map, 200];
+  Future<Map<String, dynamic>> get(String url) async {
+    final fakeResponse = {
+      'file': 'https://coffee.alexflipnote.dev/-ohqDCldco4_coffee.png',
+    };
+    return {'data': fakeResponse, 'statusCode': 200};
   }
 }

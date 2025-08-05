@@ -11,8 +11,8 @@ class RandomCoffeeService {
   Future<RemoteResponse<RandomCoffeeModel>> getRandomCoffee() async {
     final response = await dioWrapper.get(url);
     return RemoteResponse(
-      data: RandomCoffeeModel.fromMap(response[0] as Map<String, dynamic>),
-      statusCode: response[1] as int,
+      data: RandomCoffeeModel.fromMap(response['data'] as Map<String, dynamic>),
+      statusCode: response['statusCode'] as int,
     );
   }
 }

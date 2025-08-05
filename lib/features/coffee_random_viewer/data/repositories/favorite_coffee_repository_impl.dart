@@ -4,14 +4,14 @@ import 'package:verygoodcoffee/features/coffee_random_viewer/data/models/favorit
 import 'package:verygoodcoffee/features/coffee_random_viewer/domain/repositories/favorite_coffee_repository.dart';
 
 class FavoriteCoffeeRepositoryImpl extends FavoriteCoffeeRepository {
-  FavoriteCoffeeRepositoryImpl({required super.database});
+  FavoriteCoffeeRepositoryImpl({required super.databaseDaoWrapper});
 
   @override
   Future<DataState<void>> addFavoriteCoffee(
     FavoriteCoffeeModel newFavorite,
   ) async {
     try {
-      await database.favoriteCoffeeDao.insertFavoriteCoffee(newFavorite);
+      await databaseDaoWrapper.insertFavoriteCoffee(newFavorite);
       return const DataSuccess<void>(data: null);
     } on DatabaseException catch (e) {
       return DataFailure<void>(errorMessage: e.getResultCode().toString());
@@ -23,9 +23,7 @@ class FavoriteCoffeeRepositoryImpl extends FavoriteCoffeeRepository {
     FavoriteCoffeeModel formerFavorite,
   ) async {
     try {
-      await database.favoriteCoffeeDao.deleteFavoriteCoffee(
-        formerFavorite,
-      );
+      await databaseDaoWrapper.deleteFavoriteCoffee(formerFavorite);
       return const DataSuccess<void>(data: null);
     } on DatabaseException catch (e) {
       return DataFailure<void>(errorMessage: e.getResultCode().toString());
@@ -37,9 +35,8 @@ class FavoriteCoffeeRepositoryImpl extends FavoriteCoffeeRepository {
     FavoriteCoffeeModel checkCoffeeModel,
   ) async {
     try {
-      final result = await database.favoriteCoffeeDao.checkFavoriteCoffee(
-        checkCoffeeModel.imageUrl,
-      );
+      final result =
+          await databaseDaoWrapper.checkFavoriteCoffee(checkCoffeeModel);
       if (result.isEmpty) {
         return const DataSuccess<List<FavoriteCoffeeModel>>(data: []);
       } else {

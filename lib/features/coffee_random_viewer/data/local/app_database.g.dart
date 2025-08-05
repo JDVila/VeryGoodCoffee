@@ -25,7 +25,8 @@ class $FloorAppDatabase {
       _$AppDatabaseBuilder(name);
 
   /// Creates a database builder for an in memory database.
-  /// Information stored in an in memory database disappears when the process is killed.
+  /// Information stored in an in memory database disappears when the process
+  /// is killed.
   /// Once a database is built, you should keep a reference to it and re-use it.
   static $AppDatabaseBuilderContract inMemoryDatabaseBuilder() =>
       _$AppDatabaseBuilder(null);
@@ -90,13 +91,18 @@ class _$AppDatabase extends AppDatabase {
       },
       onUpgrade: (database, startVersion, endVersion) async {
         await MigrationAdapter.runMigrations(
-            database, startVersion, endVersion, migrations);
+          database,
+          startVersion,
+          endVersion,
+          migrations,
+        );
 
         await callback?.onUpgrade?.call(database, startVersion, endVersion);
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `FavoriteCoffees` (`imageUrl` TEXT NOT NULL, `id` INTEGER, `fileName` TEXT, `imageBytes` TEXT, PRIMARY KEY (`imageUrl`))');
+          '''CREATE TABLE IF NOT EXISTS `FavoriteCoffees` (`imageUrl` TEXT NOT NULL, `id` INTEGER, `fileName` TEXT, `imageBytes` TEXT, PRIMARY KEY (`imageUrl`))''',
+        );
 
         await callback?.onCreate?.call(database, version);
       },
@@ -117,24 +123,26 @@ class _$FavoriteCoffeeDao extends FavoriteCoffeeDao {
     this.changeListener,
   )   : _queryAdapter = QueryAdapter(database),
         _favoriteCoffeeModelInsertionAdapter = InsertionAdapter(
-            database,
-            'FavoriteCoffees',
-            (FavoriteCoffeeModel item) => <String, Object?>{
-                  'imageUrl': item.imageUrl,
-                  'id': item.id,
-                  'fileName': item.fileName,
-                  'imageBytes': item.imageBytes
-                }),
+          database,
+          'FavoriteCoffees',
+          (FavoriteCoffeeModel item) => <String, Object?>{
+            'imageUrl': item.imageUrl,
+            'id': item.id,
+            'fileName': item.fileName,
+            'imageBytes': item.imageBytes,
+          },
+        ),
         _favoriteCoffeeModelDeletionAdapter = DeletionAdapter(
-            database,
-            'FavoriteCoffees',
-            ['imageUrl'],
-            (FavoriteCoffeeModel item) => <String, Object?>{
-                  'imageUrl': item.imageUrl,
-                  'id': item.id,
-                  'fileName': item.fileName,
-                  'imageBytes': item.imageBytes
-                });
+          database,
+          'FavoriteCoffees',
+          ['imageUrl'],
+          (FavoriteCoffeeModel item) => <String, Object?>{
+            'imageUrl': item.imageUrl,
+            'id': item.id,
+            'fileName': item.fileName,
+            'imageBytes': item.imageBytes,
+          },
+        );
 
   final sqflite.DatabaseExecutor database;
 
@@ -150,30 +158,37 @@ class _$FavoriteCoffeeDao extends FavoriteCoffeeDao {
 
   @override
   Future<List<FavoriteCoffeeModel>> getAllFavoriteCoffees() async {
-    return _queryAdapter.queryList('SELECT * FROM FavoriteCoffees',
-        mapper: (Map<String, Object?> row) => FavoriteCoffeeModel(
-            imageUrl: row['imageUrl'] as String,
-            id: row['id'] as int?,
-            fileName: row['fileName'] as String?,
-            imageBytes: row['imageBytes'] as String?));
+    return _queryAdapter.queryList(
+      'SELECT * FROM FavoriteCoffees',
+      mapper: (Map<String, Object?> row) => FavoriteCoffeeModel(
+        imageUrl: row['imageUrl']! as String,
+        id: row['id'] as int?,
+        fileName: row['fileName'] as String?,
+        imageBytes: row['imageBytes'] as String?,
+      ),
+    );
   }
 
   @override
   Future<List<FavoriteCoffeeModel>> checkFavoriteCoffee(String imageUrl) async {
     return _queryAdapter.queryList(
-        'SELECT * FROM FavoriteCoffees WHERE imageUrl = ?1',
-        mapper: (Map<String, Object?> row) => FavoriteCoffeeModel(
-            imageUrl: row['imageUrl'] as String,
-            id: row['id'] as int?,
-            fileName: row['fileName'] as String?,
-            imageBytes: row['imageBytes'] as String?),
-        arguments: [imageUrl]);
+      'SELECT * FROM FavoriteCoffees WHERE imageUrl = ?1',
+      mapper: (Map<String, Object?> row) => FavoriteCoffeeModel(
+        imageUrl: row['imageUrl']! as String,
+        id: row['id'] as int?,
+        fileName: row['fileName'] as String?,
+        imageBytes: row['imageBytes'] as String?,
+      ),
+      arguments: [imageUrl],
+    );
   }
 
   @override
   Future<void> insertFavoriteCoffee(FavoriteCoffeeModel newFavorite) async {
     await _favoriteCoffeeModelInsertionAdapter.insert(
-        newFavorite, OnConflictStrategy.abort);
+      newFavorite,
+      OnConflictStrategy.abort,
+    );
   }
 
   @override

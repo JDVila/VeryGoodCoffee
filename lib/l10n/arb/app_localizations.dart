@@ -98,11 +98,59 @@ abstract class AppLocalizations {
     Locale('es')
   ];
 
-  /// Text shown in the AppBar of the Counter Page
+  /// Text shown in Title of the random image page
   ///
   /// In en, this message translates to:
-  /// **'Counter'**
-  String get counterAppBarTitle;
+  /// **'Coffee Viewer'**
+  String get coffeeViewer;
+
+  /// Text shown in the button for getting a new random image
+  ///
+  /// In en, this message translates to:
+  /// **'Get New Coffee Image'**
+  String get getNewCoffeeImage;
+
+  /// Text shown in the card for the photo filename
+  ///
+  /// In en, this message translates to:
+  /// **'Photo Filename:'**
+  String get photoFilename;
+
+  /// Text shown in the card for No Internet Connection
+  ///
+  /// In en, this message translates to:
+  /// **'No Internet Connection'**
+  String get noInternetConnection;
+
+  /// Text shown in the card for an Unknown Error
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Error'**
+  String get unknownError;
+
+  /// Text shown in the button Tap to Try Again
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to Try Again'**
+  String get tapToTryAgain;
+
+  /// Text shown in Title of the Favorites Page
+  ///
+  /// In en, this message translates to:
+  /// **'Coffee Favorites'**
+  String get coffeeFavorites;
+
+  /// Text shown in the left bottom navigation bar
+  ///
+  /// In en, this message translates to:
+  /// **'Random Coffee'**
+  String get randomCoffee;
+
+  /// Text shown in the right bottom navigation bar
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Coffees'**
+  String get favoriteCoffees;
 }
 
 class _AppLocalizationsDelegate

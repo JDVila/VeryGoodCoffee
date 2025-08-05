@@ -6,27 +6,14 @@ import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/bloc/f
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/bloc/random_coffee_bloc/random_coffee_bloc.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/widgets/random_coffee_card_widget.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/widgets/random_coffee_error_widget.dart';
-import 'package:verygoodcoffee/injection_container.dart';
+import 'package:verygoodcoffee/l10n/arb/app_localizations.dart';
 
 class RandomCoffeePage extends StatelessWidget {
   const RandomCoffeePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => sl.get<RandomCoffeeBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => sl.get<FavoriteCoffeeBloc>(),
-        ),
-        BlocProvider(
-          create: (_) => sl.get<FavoriteCoffeeButtonCubit>(),
-        ),
-      ],
-      child: const RandomCoffeeView(),
-    );
+    return const RandomCoffeeView();
   }
 }
 
@@ -41,9 +28,10 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
   @override
   void initState() {
     super.initState();
-    context.read<RandomCoffeeBloc>().add(
-          LoadRandomCoffee(),
-        );
+    final currentState = BlocProvider.of<RandomCoffeeBloc>(context).state;
+    if (currentState is RandomCoffeeInitial) {
+      BlocProvider.of<RandomCoffeeBloc>(context).add(RandomCoffeeLoad());
+    }
   }
 
   @override
@@ -55,14 +43,14 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
             color: Colors.white,
             child: Column(
               children: [
-                const Card(
+                Card(
                   color: Colors.deepPurple,
                   child: Center(
                     child: Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Text(
-                        'Coffee Viewer',
-                        style: TextStyle(
+                        AppLocalizations.of(context).coffeeViewer,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -73,20 +61,20 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
                 ),
                 switch (state.runtimeType) {
                   RandomCoffeeInitial => const CircularProgressIndicator(),
-                  RandomCoffeeNoInternet => RandomCoffeeErrorWidget(
+                  RandomCoffeeInternetFailure => RandomCoffeeErrorWidget(
                       isInternetError: true,
                       onPressed: () async {
-                        context.read<RandomCoffeeBloc>().add(
-                              LoadRandomCoffee(),
-                            );
+                        BlocProvider.of<RandomCoffeeBloc>(context)
+                            .add(RandomCoffeeLoad());
                       },
                     ),
-                  RandomCoffeeError => RandomCoffeeErrorWidget(
+                  RandomCoffeeFailure => RandomCoffeeErrorWidget(
                       isInternetError: false,
                       onPressed: () async {
-                        context.read<RandomCoffeeBloc>().add(
-                              LoadRandomCoffee(),
-                            );
+                        if (context.mounted) {
+                          BlocProvider.of<RandomCoffeeBloc>(context)
+                              .add(RandomCoffeeLoad());
+                        }
                       },
                     ),
                   _ => Column(
@@ -101,27 +89,58 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
                             clipBehavior: Clip.hardEdge,
                             child: switch (state.runtimeType) {
                               RandomCoffeeLoading => RandomCoffeeCard(
-                                  isPressed: context
-                                      .watch<FavoriteCoffeeButtonCubit>()
+                                  isPressed: BlocProvider.of<
+                                          FavoriteCoffeeButtonCubit>(context)
                                       .state,
                                   onPressed: () {},
                                 ),
-                              RandomCoffeeLoaded => RandomCoffeeCard(
-                                  isPressed: context
-                                      .watch<FavoriteCoffeeButtonCubit>()
-                                      .state,
-                                  imageUrl: state.entity.imageUrl,
-                                  fileName: state.entity.fileName,
-                                  onPressed: () {
-                                    context.read<FavoriteCoffeeBloc>().add(
-                                          ClickFavoriteCoffee(
-                                            entity: FavoriteCoffeeEntity(
-                                              imageUrl: state.entity.imageUrl,
-                                              fileName: state.entity.fileName,
-                                            ),
-                                          ),
-                                        );
+                              RandomCoffeeSuccess => BlocListener<
+                                    FavoriteCoffeeBloc, FavoriteCoffeeState>(
+                                  listener: (
+                                    favoriteCoffeeContext,
+                                    favoriteCoffeeState,
+                                  ) {
+                                    if (favoriteCoffeeState
+                                        is FavoriteCoffeeAdded) {
+                                      BlocProvider.of<
+                                          FavoriteCoffeeButtonCubit>(
+                                        favoriteCoffeeContext,
+                                      ).clickButton(
+                                        isPressed: true,
+                                      );
+                                    }
+                                    if (favoriteCoffeeState
+                                            is FavoriteCoffeeRemoved ||
+                                        favoriteCoffeeState
+                                            is FavoriteCoffeeInitial) {
+                                      BlocProvider.of<
+                                          FavoriteCoffeeButtonCubit>(
+                                        favoriteCoffeeContext,
+                                      ).clickButton();
+                                    }
                                   },
+                                  child: BlocBuilder<FavoriteCoffeeButtonCubit,
+                                      bool>(
+                                    builder: (cubitContext, cubitState) {
+                                      return RandomCoffeeCard(
+                                        isPressed: cubitState,
+                                        imageUrl: state.entity.imageUrl,
+                                        fileName: state.entity.fileName,
+                                        onPressed: () {
+                                          BlocProvider.of<FavoriteCoffeeBloc>(
+                                            context,
+                                          ).add(
+                                            FavoriteCoffeeClicked(
+                                              entity: FavoriteCoffeeEntity(
+                                                imageUrl: state.entity.imageUrl,
+                                                fileName: state.entity.fileName,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
                                 ),
                               _ => const SizedBox.shrink(),
                             },
@@ -132,11 +151,15 @@ class _RandomCoffeeViewState extends State<RandomCoffeeView> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Text('Get New Coffee Image'),
+                          child: Text(
+                            AppLocalizations.of(context).getNewCoffeeImage,
+                          ),
                           onPressed: () {
-                            context.read<RandomCoffeeBloc>().add(
-                                  LoadRandomCoffee(),
-                                );
+                            BlocProvider.of<RandomCoffeeBloc>(
+                              context,
+                            ).add(
+                              RandomCoffeeLoad(),
+                            );
                           },
                         ),
                       ],

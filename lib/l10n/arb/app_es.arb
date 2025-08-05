@@ -1,7 +1,47 @@
 {
     "@@locale": "es",
-    "counterAppBarTitle": "Contador",
-    "@counterAppBarTitle": {
-        "description": "Texto mostrado en la AppBar de la página del contador"
+    "coffeeViewer": "Visor de Café",
+    "@coffeeViewer": {
+        "description": "Texto que se muestra en el título de la página de imágenes aleatorias"
+    },
+    "@@locale": "es",
+    "getNewCoffeeImage": "Obtener Nueva Imagen de Café",
+    "@getNewCoffeeImage": {
+        "description": "Texto que se muestra en el botón para obtener una nueva imagen aleatoria"
+    },
+    "@@locale": "es",
+    "photoFilename": "Nombre de Archivo de la Foto:",
+    "@photoFilename": {
+        "description": "Texto que se muestra en la tarjeta para el nombre del archivo de la foto"
+    },
+    "@@locale": "es",
+    "noInternetConnection": "Sin conexión a Internet",
+    "@noInternetConnection": {
+        "description": "Texto que se muestra en la tarjeta cuando no hay conexión a Internet"
+    },
+    "@@locale": "es",
+    "unknownError": "Error desconocido",
+    "@unknownError": {
+        "description": "Texto que se muestra en la tarjeta para un error desconocido"
+    },
+    "@@locale": "es",
+    "tapToTryAgain": "Toca para Volver a Intentarlo",
+    "@tapToTryAgain": {
+        "description": "Texto que se muestra en el botón Toca para volver a intentarlo"
+    },
+    "@@locale": "es",
+    "coffeeFavorites": "Favoritos del Café",
+    "@coffeeFavorites": {
+        "description": "Texto que se muestra en el título de la página de favoritos"
+    },
+    "@@locale": "es",
+    "randomCoffee": "Café al Azar",
+    "@randomCoffee": {
+        "description": "Texto que se muestra en la barra de navegación inferior izquierda"
+    },
+    "@@locale": "es",
+    "favoriteCoffees": "Cafés Favoritas",
+    "@favoriteCoffees": {
+        "description": "Texto que se muestra en la barra de navegación inferior derecha"
     }
 }

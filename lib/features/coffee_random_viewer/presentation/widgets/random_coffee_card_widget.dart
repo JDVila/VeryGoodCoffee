@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:verygoodcoffee/l10n/arb/app_localizations.dart';
 
 class RandomCoffeeCard extends StatelessWidget {
   const RandomCoffeeCard({
@@ -25,6 +27,16 @@ class RandomCoffeeCard extends StatelessWidget {
               ? Image.network(
                   imageUrl!,
                   fit: BoxFit.cover,
+                  errorBuilder: (
+                    BuildContext context,
+                    Object exception,
+                    StackTrace? stackTrace,
+                  ) {
+                    if (kDebugMode) {
+                      return const Placeholder();
+                    }
+                    return Image.asset('assets/images/placeholder_512px.png');
+                  },
                 )
               : Container(
                   height: 250,
@@ -33,8 +45,8 @@ class RandomCoffeeCard extends StatelessWidget {
         ),
         ListTile(
           title: imageUrl != null
-              ? const Text(
-                  'Photo Filename:',
+              ? Text(
+                  AppLocalizations.of(context).photoFilename,
                 )
               : Container(
                   height: 15,

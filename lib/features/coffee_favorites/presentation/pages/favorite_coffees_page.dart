@@ -3,16 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:verygoodcoffee/features/coffee_favorites/presentation/bloc/coffee_favorites_bloc.dart';
 import 'package:verygoodcoffee/features/coffee_favorites/presentation/widgets/favorite_coffee_card.dart';
 import 'package:verygoodcoffee/features/coffee_random_viewer/presentation/widgets/random_coffee_error_widget.dart';
+import 'package:verygoodcoffee/l10n/arb/app_localizations.dart';
 
 class FavoriteCoffeesPage extends StatelessWidget {
   const FavoriteCoffeesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CoffeeFavoritesBloc(),
-      child: const FavoriteCoffeesView(),
-    );
+    return const FavoriteCoffeesView();
   }
 }
 
@@ -23,19 +21,17 @@ class FavoriteCoffeesView extends StatefulWidget {
   State<FavoriteCoffeesView> createState() => _FavoriteCoffeesViewState();
 }
 
-class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
-    with AutomaticKeepAliveClientMixin {
+class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView> {
   @override
   void initState() {
     context.read<CoffeeFavoritesBloc>().add(
-          LoadCoffeeFavoritesList(),
+          FavoritesListLoad(),
         );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return SafeArea(
       child: Card(
         color: Colors.white,
@@ -44,17 +40,17 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
             return switch (state) {
               CoffeeFavoritesInitial() => Container(),
               CoffeeFavoritesListLoading() => const CircularProgressIndicator(),
-              CoffeeFavoritesListLoaded() => Column(
+              CoffeeFavoritesListSuccess() => Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Card(
+                    Card(
                       color: Colors.deepPurple,
                       child: Center(
                         child: Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           child: Text(
-                            'Coffee Favorites',
-                            style: TextStyle(
+                            AppLocalizations.of(context).coffeeFavorites,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -67,7 +63,7 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
                       child: RefreshIndicator(
                         onRefresh: () async {
                           context.read<CoffeeFavoritesBloc>().add(
-                                LoadCoffeeFavoritesList(),
+                                FavoritesListLoad(),
                               );
                         },
                         child: ListView.builder(
@@ -86,11 +82,11 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
                     ),
                   ],
                 ),
-              CoffeeFavoritesListError() => RandomCoffeeErrorWidget(
+              CoffeeFavoritesListFailure() => RandomCoffeeErrorWidget(
                   isInternetError: false,
                   onPressed: () {
                     context.read<CoffeeFavoritesBloc>().add(
-                          LoadCoffeeFavoritesList(),
+                          FavoritesListLoad(),
                         );
                   },
                 ),
@@ -100,7 +96,4 @@ class _FavoriteCoffeesViewState extends State<FavoriteCoffeesView>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => false;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:verygoodcoffee/l10n/arb/app_localizations.dart';
 
 class RandomCoffeeErrorWidget extends StatelessWidget {
   const RandomCoffeeErrorWidget({
@@ -18,7 +19,9 @@ class RandomCoffeeErrorWidget extends StatelessWidget {
           isInternetError ? Icons.wifi_off : Icons.error,
         ),
         Text(
-          isInternetError ? 'No Internet Connection' : 'Unknown Error',
+          isInternetError
+              ? AppLocalizations.of(context).noInternetConnection
+              : AppLocalizations.of(context).unknownError,
         ),
         MaterialButton(
           color: Colors.orangeAccent,
@@ -26,7 +29,7 @@ class RandomCoffeeErrorWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           onPressed: onPressed,
-          child: const Text('Tap to Try Again'),
+          child: Text(AppLocalizations.of(context).tapToTryAgain),
         ),
       ],
     );
